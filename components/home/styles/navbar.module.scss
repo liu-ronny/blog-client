@@ -1,0 +1,42 @@
+@use "../../../styles/theme";
+
+.navbar {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.divider {
+  font-size: 2.2rem;
+}
+
+.toggler {
+  position: relative;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color ease-in-out 0.2s;
+
+  &:hover {
+    background-color: rgba(theme.$white, 0.3);
+  }
+}
+
+.slider {
+  position: relative;
+  padding-bottom: 0.25rem;
+
+  &::after {
+    position: absolute;
+    display: block;
+    content: "";
+    background-color: theme.$white;
+    top: 100%;
+    left: 0%;
+    width: 0%;
+    height: 2px;
+    transition: width ease-in 0.3s;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
+}

@@ -1,0 +1,51 @@
+@use "../../../styles/theme";
+
+.sidebar {
+  position: absolute;
+  top: 0;
+  right: -400px;
+  width: 400px;
+  height: 100%;
+  z-index: 9999;
+  overflow: hidden;
+}
+
+.header {
+  background-color: theme.$primary-green;
+  color: theme.$white;
+}
+
+.body {
+  background-color: theme.$white;
+}
+
+.lead {
+  font-size: 1.5rem;
+}
+
+.closeIcon {
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.enter {
+  right: -400px;
+}
+
+.enterActive {
+  right: 0;
+  transition: right 500ms;
+}
+
+.enterDone {
+  right: 0;
+}
+
+.exit {
+  right: 0;
+}
+
+.exitActive {
+  right: -400px;
+  transition: right 500ms;
+}

@@ -1,0 +1,32 @@
+@use "theme";
+
+// Bootstrap variable overrides - see Bootstrap's _variables.scss source file
+$font-family-sans-serif: theme.$font;
+$link-color: theme.$white;
+$body-bg: theme.$grey;
+
+// Navbar overrides
+$navbar-light-color: theme.$white;
+$navbar-light-hover-color: rgba(theme.$white, 0.7);
+$navbar-light-brand-color: theme.$white;
+$navbar-light-brand-hover-color: rgba(theme.$white, 0.7);
+$navbar-brand-font-size: 1.5rem;
+// $navbar-light-active-color: theme.$white;
+// $navbar-light-disabled-color:       rgba($black, .3) !default;
+// $navbar-light-toggler-icon-bg:      url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'><path stroke='#{$navbar-light-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
+// $navbar-light-toggler-border-color: rgba($black, .1) !default;
+
+// $navbar-light-brand-color:                $navbar-light-active-color !default;
+// $navbar-light-brand-hover-color:          $navbar-light-active-color !default;
+
+// Custom theme map that merges with Bootstrap's default themes
+$theme-colors: (
+  "blue": theme.$blue,
+  "grey": theme.$grey,
+  "primary-green": theme.$primary-green,
+  "secondary-green": theme.$secondary-green,
+  "black": theme.$black,
+  "white": theme.$white,
+);
+
+@import "./node_modules/bootstrap/scss/bootstrap";
