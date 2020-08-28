@@ -4,7 +4,7 @@ import styles from "./styles/sidebar.module.scss";
 
 export default function Sidebar({ onToggle }) {
   return (
-    <div className={"d-flex flex-column " + styles.sidebar}>
+    <div className={"d-flex flex-column " + styles.container}>
       <div className={"p-5 " + styles.header}>
         <div className="d-flex justify-content-between align-items-center">
           <div className={styles.lead}>Ronny Liu</div>

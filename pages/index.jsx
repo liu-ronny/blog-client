@@ -1,35 +1,43 @@
-import { useState } from "react";
-import { CSSTransition } from "react-transition-group";
-import Navbar from "../components/home/navbar";
-import Sidebar from "../components/home/sidebar";
-import Overlay from "../components/home/overlay";
-import sidebarStyles from "../components/home/styles/sidebar.module.scss";
-import overlayStyles from "../components/home/styles/overlay.module.scss";
+import blogsApi from "../api/blogs";
+import classnames from "classnames";
+import Page from "../components/general/page";
+import Content from "../components/general/content";
+import Header from "../components/general/header";
+import Tags from "../components/home/tags";
+import Searchbar from "../components/home/searchbar";
+import Blogs from "../components/home/blogs";
 
-export default function Home(props) {
-  const [showSidebar, setSidebar] = useState(false);
-
-  const handleToggle = () => setSidebar(!showSidebar);
+const Home = ({ error, blogs }) => {
+  const contentClassNames = classnames({ "vh-100": error });
 
   return (
-    <>
-      <CSSTransition
-        in={showSidebar}
-        timeout={500}
-        classNames={{ ...sidebarStyles }}
-      >
-        <Sidebar onToggle={handleToggle} />
-      </CSSTransition>
-
-      <CSSTransition
-        in={showSidebar}
-        timeout={300}
-        classNames={{ ...overlayStyles }}
-      >
-        <Overlay onToggle={handleToggle} />
-      </CSSTransition>
-
-      <Navbar onToggle={handleToggle} />
-    </>
+    <Page>
+      <Content className={contentClassNames}>
+        <Header text="blog" />
+        <Tags />
+        <Searchbar />
+        <Blogs error={error} blogs={blogs} />
+      </Content>
+    </Page>
   );
+};
+
+export async function getStaticProps(context) {
+  try {
+    var blogs = await blogsApi.getAll();
+  } catch (err) {
+    console.log(err);
+    var error = {
+      message: "Something went wrong on the server. Please try again later.",
+    };
+  }
+
+  return {
+    props: {
+      blogs: blogs ? blogs : null,
+      error: error ? error : null,
+    },
+  };
 }
+
+export default Home;

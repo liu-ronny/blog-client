@@ -1,0 +1,10 @@
+@use "../../../styles/theme";
+
+.container {
+  position: relative;
+  top: -5rem;
+  left: 0;
+  z-index: 10;
+  background-color: theme.$white;
+  color: theme.$black;
+}

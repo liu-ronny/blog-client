@@ -1,0 +1,68 @@
+@use "../../../styles/theme";
+
+.container {
+  position: relative;
+  margin-bottom: 5rem;
+}
+
+.form {
+  width: 0;
+
+  .input {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1.25px solid theme.$dark-grey;
+    padding: 0;
+    width: 100%;
+    outline: none;
+    box-shadow: none;
+    color: theme.$black;
+    text-align: center;
+  }
+}
+
+.icon {
+  color: theme.$primary-green;
+  cursor: pointer;
+
+  &:hover {
+    color: rgba(theme.$primary-green, 0.7);
+  }
+}
+
+.enterActive {
+  width: 40%;
+  transition: width ease-in-out 600ms;
+
+  & + svg {
+    margin-left: 1rem;
+    transition: margin-left ease-in-out 600ms;
+  }
+}
+
+.enterDone {
+  width: 40%;
+
+  & + svg {
+    margin-left: 1rem;
+  }
+}
+
+.exit {
+  width: 40%;
+
+  & + svg {
+    margin-left: 1rem;
+  }
+}
+
+.exitActive {
+  width: 0;
+  transition: width ease-in-out 600ms;
+
+  & + svg {
+    margin-left: 0;
+    transition: margin-left ease-in-out 600ms;
+  }
+}

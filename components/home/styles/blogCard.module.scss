@@ -1,0 +1,50 @@
+@use "../../../styles/theme";
+
+.date {
+  position: relative;
+  border-right: 1px solid theme.$dark-grey;
+  line-height: 2.5rem;
+  min-width: 120px;
+}
+
+.day {
+  font-family: "Domine", serif;
+  font-size: 3rem;
+  font-weight: 500;
+  color: theme.$primary-green;
+  text-align: center;
+}
+
+.month {
+  font-size: 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+.dateDividerIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+  color: theme.$primary-green;
+  background-color: theme.$white;
+}
+
+.text {
+  .title {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 2rem;
+  }
+
+  .body {
+    font-family: "Domine", serif;
+    line-height: 1.8rem;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+}
+
+.button {
+  border-radius: 0;
+}
