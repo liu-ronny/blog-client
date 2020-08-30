@@ -6,5 +6,5 @@ const Dashboard = () => {
 
 export default withRouteProtection(Dashboard, {
   redirectIf: "loggedOut",
-  redirectTo: "/admin/login",
+  redirectTo: "/",
 });

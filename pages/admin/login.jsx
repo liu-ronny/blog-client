@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { mutate } from "swr";
 import { Container } from "react-bootstrap";
 import withRouteProtection from "../../components/hoc/withRouteProtection";
 import Navbar from "../../components/login/navbar";
@@ -14,16 +15,20 @@ const Login = () => {
 
   const handleSubmit = async (username, password) => {
     setErrorMessage("");
-
     setAuthenticating(true);
+
     const { authenticated, error } = await login(username, password);
-    setAuthenticating(false);
 
     if (authenticated) {
-      router.replace("/admin/dashboard");
+      const url = process.env.NEXT_PUBLIC_API_URL + "/sessions";
+      mutate(url);
+
+      router.push("/admin/dashboard");
     } else {
       setErrorMessage(error);
     }
+
+    setAuthenticating(false);
   };
 
   return (

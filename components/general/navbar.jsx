@@ -10,7 +10,9 @@ export default function NavbarComponent({ className, onToggle }) {
     <Navbar className={"bg-primary-green text-white pt-4 " + styles.container}>
       <Container className="justify-content-end">
         <Link href="/" passHref>
-          <Logo />
+          <a>
+            <Logo />
+          </a>
         </Link>
         <Nav className="ml-auto">
           <Link href="/" passHref>

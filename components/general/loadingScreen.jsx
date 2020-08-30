@@ -1,7 +1,7 @@
 import { Spinner } from "react-bootstrap";
 import styles from "./styles/loadingScreen.module.scss";
 
-export default function Loader() {
+export default function LoadingScreen() {
   return (
     <div
       className={

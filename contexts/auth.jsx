@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from "react";
-import useAuthentication from "../hooks/useSessions";
+import useSessions from "../hooks/useSessions";
 
 export const AuthContext = createContext({});
 
@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [authError, setAuthError] = useState(false);
 
-  const { isLoggedIn, finished, error } = useAuthentication();
+  const { isLoggedIn, finished, error } = useSessions();
 
   useEffect(() => {
     if (finished) {

@@ -7,7 +7,9 @@ export default function NavbarComponent() {
     <Navbar className="bg-primary-green text-white py-4">
       <Container className="justify-content-center">
         <Link href="/" passHref>
-          <Logo />
+          <a>
+            <Logo />
+          </a>
         </Link>
       </Container>
     </Navbar>

@@ -10,13 +10,25 @@ export default function withRouteProtection(Component, pageProps) {
     const { loading, authenticated, authError } = useAuth();
     const router = useRouter();
 
+    if (redirectIf === "loggedOut") {
+      console.log("on /admin/dashboard");
+      console.log(
+        `loading: ${loading}, authenticated: ${authenticated}, authError: ${authError}`
+      );
+    }
+
     const redirectAuthenticatedUser =
-      authenticated && redirectIf === "loggedIn";
+      !loading && authenticated && redirectIf === "loggedIn";
     const redirectUnauthorizedUser =
-      !authenticated && redirectIf === "loggedOut";
+      !loading && !authenticated && redirectIf === "loggedOut";
 
     useEffect(() => {
       if (redirectAuthenticatedUser || redirectUnauthorizedUser) {
+        console.log(
+          "redirecting authenticated user",
+          redirectAuthenticatedUser
+        );
+        console.log("redirecting unauthorized user", redirectUnauthorizedUser);
         router.replace(redirectTo);
       }
 
@@ -24,10 +36,10 @@ export default function withRouteProtection(Component, pageProps) {
         router.replace("/");
       }
     }, [
-      loading,
       redirectAuthenticatedUser,
       redirectUnauthorizedUser,
       authError,
+      router,
     ]);
 
     if (
