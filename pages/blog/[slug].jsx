@@ -1,4 +1,4 @@
-import blogsApi from "../../api/blogs";
+import { getAll, getBySlug } from "../../api/blogs";
 import Page from "../../components/general/page";
 import Content from "../../components/general/content";
 import Post from "../../components/blog/post";
@@ -14,7 +14,7 @@ const Blog = ({ blog }) => {
 };
 
 export async function getStaticPaths() {
-  const blogs = await blogsApi.getAll();
+  const blogs = await getAll();
 
   const paths = blogs.map((blog) => ({
     params: { slug: blog.slug },
@@ -24,7 +24,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const blog = await blogsApi.getBySlug(params.slug);
+  const blog = await getBySlug(params.slug);
   return { props: { blog } };
 }
 

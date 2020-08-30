@@ -1,4 +1,4 @@
-import blogsApi from "../api/blogs";
+import { getAll } from "../api/blogs";
 import classnames from "classnames";
 import Page from "../components/general/page";
 import Content from "../components/general/content";
@@ -24,7 +24,7 @@ const Home = ({ error, blogs }) => {
 
 export async function getStaticProps(context) {
   try {
-    var blogs = await blogsApi.getAll();
+    var blogs = await getAll();
   } catch (err) {
     console.log(err);
     var error = {

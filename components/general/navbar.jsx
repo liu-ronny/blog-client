@@ -1,21 +1,16 @@
 import Link from "next/link";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSlash, faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars } from "@fortawesome/free-solid-svg-icons";
+import Logo from "./logo";
 import styles from "./styles/navbar.module.scss";
 
-export default function NavbarComponent({ onToggle }) {
+export default function NavbarComponent({ className, onToggle }) {
   return (
     <Navbar className={"bg-primary-green text-white pt-4 " + styles.container}>
       <Container className="justify-content-end">
         <Link href="/" passHref>
-          <Navbar.Brand className="mr-auto">
-            <span className="align-top">ronny</span>
-            <span className={styles.divider}>
-              <FontAwesomeIcon icon={faSlash} rotation={90} />
-            </span>
-            <span className="align-bottom">liu</span>
-          </Navbar.Brand>
+          <Logo />
         </Link>
         <Nav className="ml-auto">
           <Link href="/" passHref>

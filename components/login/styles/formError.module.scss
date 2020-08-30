@@ -1,0 +1,7 @@
+@use "../../../styles/theme";
+
+.error {
+  display: inline-flex;
+  align-items: center;
+  color: theme.$red;
+}

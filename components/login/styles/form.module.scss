@@ -1,0 +1,53 @@
+@use "../../../styles/theme";
+
+.container {
+  position: relative;
+
+  label {
+    color: theme.$primary-green;
+    font-weight: 500;
+  }
+
+  input {
+    transition: all ease-in-out 300ms;
+    height: 2.5rem;
+  }
+
+  input:focus {
+    outline: none;
+    box-shadow: none;
+    border: 1px solid theme.$primary-green;
+  }
+}
+
+.icon {
+  color: theme.$white;
+}
+
+.errorBorder {
+  border: 1px solid theme.$red;
+
+  &:focus {
+    border: 1px solid theme.$red !important;
+  }
+
+  &:active {
+    border: 1px solid theme.$red !important;
+  }
+}
+
+//   input {
+//     background-color: #f6f6f6;
+//     border-color: #f6f6f6;
+//     height: 60px;
+//     border-radius: 5px;
+//     transition: all 0.5s ease-in-out;
+//   }
+
+//   input:focus {
+//     background-color: white;
+//     border-color: #ccd2d9;
+//     opacity: 0.8;
+//     outline: none;
+//     box-shadow: none;
+//   }
