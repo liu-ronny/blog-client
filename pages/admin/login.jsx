@@ -1,11 +1,11 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { mutate } from "swr";
+import { login } from "../../api/users";
 import { Container } from "react-bootstrap";
 import withRouteProtection from "../../components/hoc/withRouteProtection";
 import LoginLayout from "../../components/layouts/login";
 import Form from "../../components/login/form";
-import { login } from "../../api/users";
 import styles from "../../styles/admin/login.module.scss";
 
 const Login = () => {
@@ -23,12 +23,11 @@ const Login = () => {
     mutate(url);
 
     if (authenticated) {
-      router.push("/admin/dashboard");
+      router.push("/admin/dashboard/posts");
     } else {
       setErrorMessage(error);
+      setAuthenticating(false);
     }
-
-    setAuthenticating(false);
   };
 
   return (
@@ -48,7 +47,7 @@ const Login = () => {
 
 const ProtectedLogin = withRouteProtection(Login, {
   redirectIf: "loggedIn",
-  redirectTo: "/admin/dashboard",
+  redirectTo: "/admin/dashboard/posts",
 });
 
 ProtectedLogin.layout = LoginLayout;

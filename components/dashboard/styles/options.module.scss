@@ -6,14 +6,19 @@
 
 .option {
   cursor: pointer;
+  color: theme.$secondary-green;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
 
   &:hover {
     color: rgba(theme.$secondary-green, 0.7);
   }
 }
 
-.optionsHeader {
+.header {
   font-size: 1.25rem;
   font-weight: 500;
   border-bottom: 1px solid theme.$secondary-green;
+  margin-bottom: 1rem;
 }
