@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import useAuth from "../../hooks/useAuth";
-import LoadingScreen from "../general/loadingScreen";
+import Spinner from "../general/spinner";
 
 /* eslint-disable */
 export default function withRouteProtection(Component, pageProps) {
@@ -10,45 +10,32 @@ export default function withRouteProtection(Component, pageProps) {
     const { loading, authenticated, authError } = useAuth();
     const router = useRouter();
 
-    if (redirectIf === "loggedOut") {
-      console.log("on /admin/dashboard");
-      console.log(
-        `loading: ${loading}, authenticated: ${authenticated}, authError: ${authError}`
-      );
-    }
+    const [showSpinner, setShowSpinner] = useState(true);
 
     const redirectAuthenticatedUser =
       !loading && authenticated && redirectIf === "loggedIn";
     const redirectUnauthorizedUser =
       !loading && !authenticated && redirectIf === "loggedOut";
+    const redirect = redirectAuthenticatedUser || redirectUnauthorizedUser;
 
     useEffect(() => {
-      if (redirectAuthenticatedUser || redirectUnauthorizedUser) {
-        console.log(
-          "redirecting authenticated user",
-          redirectAuthenticatedUser
-        );
-        console.log("redirecting unauthorized user", redirectUnauthorizedUser);
+      if (redirect) {
         router.replace(redirectTo);
       }
 
       if (authError) {
         router.replace("/");
       }
-    }, [
-      redirectAuthenticatedUser,
-      redirectUnauthorizedUser,
-      authError,
-      router,
-    ]);
+    }, [redirect, redirectTo, authError, router]);
 
-    if (
-      loading ||
-      redirectAuthenticatedUser ||
-      redirectUnauthorizedUser ||
-      authError
-    ) {
-      return <LoadingScreen />;
+    useEffect(() => {
+      if (!loading && !redirect && !authError) {
+        setTimeout(() => setShowSpinner(false), 1500);
+      }
+    }, [loading, redirect, authError]);
+
+    if (showSpinner) {
+      return <Spinner />;
     }
 
     return <Component {...props} />;

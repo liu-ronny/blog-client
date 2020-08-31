@@ -13,7 +13,7 @@ export default function Blogs({ error, blogs }) {
     </div>
   ) : (
     blogs.map((blog) => {
-      return <BlogCard className={styles.blogCard} key={blog.id} blog={blog} />;
+      return <BlogCard key={blog.id} className={styles.blogCard} blog={blog} />;
     })
   );
 }

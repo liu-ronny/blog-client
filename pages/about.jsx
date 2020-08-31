@@ -1,14 +1,12 @@
 import Page from "../components/general/page";
+import MainLayout from "../components/layouts/main";
 import Content from "../components/general/content";
 import Header from "../components/general/header";
 
 const About = () => {
-  return (
-    <Page>
-      <Content className="vh-100">
-        <Header text="about" />
-      </Content>
-    </Page>
-  );
+  return <Header text="about" />;
 };
+
+About.layout = MainLayout;
+
 export default About;

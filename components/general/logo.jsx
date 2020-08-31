@@ -3,15 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSlash } from "@fortawesome/free-solid-svg-icons";
 import styles from "./styles/logo.module.scss";
 
-export default function Logo({ href }) {
-  const attributes = {};
-
-  if (href) {
-    attributes.href = href;
-  }
-
+export default function Logo() {
   return (
-    <Navbar.Brand className="mr-auto" {...attributes}>
+    <Navbar.Brand className="mr-auto">
       <span className="align-top">ronny</span>
       <span className={styles.divider}>
         <FontAwesomeIcon icon={faSlash} rotation={90} />

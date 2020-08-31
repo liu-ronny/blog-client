@@ -1,3 +1,4 @@
+import MainLayout from "../components/layouts/main";
 import { getAll } from "../api/blogs";
 import classnames from "classnames";
 import Page from "../components/general/page";
@@ -8,17 +9,13 @@ import Searchbar from "../components/home/searchbar";
 import Blogs from "../components/home/blogs";
 
 const Home = ({ error, blogs }) => {
-  const contentClassNames = classnames({ "vh-100": error });
-
   return (
-    <Page>
-      <Content className={contentClassNames}>
-        <Header text="blog" />
-        <Tags />
-        <Searchbar />
-        <Blogs error={error} blogs={blogs} />
-      </Content>
-    </Page>
+    <>
+      <Header text="blog" />
+      <Tags />
+      <Searchbar />
+      <Blogs error={error} blogs={blogs} />
+    </>
   );
 };
 
@@ -39,5 +36,7 @@ export async function getStaticProps(context) {
     },
   };
 }
+
+Home.layout = MainLayout;
 
 export default Home;

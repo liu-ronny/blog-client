@@ -1,17 +1,14 @@
+import MainLayout from "../../components/layouts/main";
 import { getAll, getBySlug } from "../../api/blogs";
 import Page from "../../components/general/page";
 import Content from "../../components/general/content";
 import Post from "../../components/blog/post";
 
 const Blog = ({ blog }) => {
-  return (
-    <Page>
-      <Content>
-        <Post blog={blog} />
-      </Content>
-    </Page>
-  );
+  return <Post blog={blog} />;
 };
+
+Blog.layout = MainLayout;
 
 export async function getStaticPaths() {
   const blogs = await getAll();

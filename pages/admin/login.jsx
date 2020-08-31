@@ -3,7 +3,7 @@ import { useState } from "react";
 import { mutate } from "swr";
 import { Container } from "react-bootstrap";
 import withRouteProtection from "../../components/hoc/withRouteProtection";
-import Navbar from "../../components/login/navbar";
+import LoginLayout from "../../components/layouts/login";
 import Form from "../../components/login/form";
 import { login } from "../../api/users";
 import styles from "../../styles/admin/login.module.scss";
@@ -33,7 +33,6 @@ const Login = () => {
 
   return (
     <>
-      <Navbar />
       <Container
         className={"d-flex justify-content-center " + styles.container}
       >
@@ -47,7 +46,11 @@ const Login = () => {
   );
 };
 
-export default withRouteProtection(Login, {
+const ProtectedLogin = withRouteProtection(Login, {
   redirectIf: "loggedIn",
   redirectTo: "/admin/dashboard",
 });
+
+ProtectedLogin.layout = LoginLayout;
+
+export default ProtectedLogin;
