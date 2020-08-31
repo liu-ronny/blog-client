@@ -1,7 +1,5 @@
 import MainLayout from "../../components/layouts/main";
 import { getAll, getBySlug } from "../../api/blogs";
-import Page from "../../components/general/page";
-import Content from "../../components/general/content";
 import Post from "../../components/blog/post";
 
 const Blog = ({ blog }) => {
