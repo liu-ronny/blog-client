@@ -1,0 +1,23 @@
+@use "../../../styles/theme";
+
+.container {
+  color: theme.$secondary-green;
+}
+
+.options {
+  border-right: 1px solid #d2d5d9;
+}
+
+.option {
+  cursor: pointer;
+
+  &:hover {
+    color: rgba(theme.$secondary-green, 0.7);
+  }
+}
+
+.optionsHeader {
+  font-size: 1.25rem;
+  font-weight: 500;
+  border-bottom: 1px solid theme.$secondary-green;
+}

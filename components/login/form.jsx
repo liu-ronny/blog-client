@@ -2,7 +2,7 @@ import { Form, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faUnlockAlt } from "@fortawesome/free-solid-svg-icons";
 import FormError from "./formError";
-import Loader from "./loader";
+import Spinner from "./spinner";
 import useFormValue from "../../hooks/useFormValue";
 import classnames from "classnames";
 import styles from "./styles/form.module.scss";
@@ -85,7 +85,7 @@ const FormComponent = ({ onSubmit, errorMessage, authenticating }) => {
           Log in
         </Button>
       </Form>
-      {authenticating ? <Loader /> : null}
+      {authenticating ? <Spinner /> : null}
     </div>
   );
 };

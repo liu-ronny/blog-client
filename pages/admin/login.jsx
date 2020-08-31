@@ -19,10 +19,10 @@ const Login = () => {
 
     const { authenticated, error } = await login(username, password);
 
-    if (authenticated) {
-      const url = process.env.NEXT_PUBLIC_API_URL + "/sessions";
-      mutate(url);
+    const url = process.env.NEXT_PUBLIC_API_URL + "/sessions";
+    mutate(url);
 
+    if (authenticated) {
       router.push("/admin/dashboard");
     } else {
       setErrorMessage(error);

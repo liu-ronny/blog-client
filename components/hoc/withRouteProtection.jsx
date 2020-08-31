@@ -30,7 +30,7 @@ export default function withRouteProtection(Component, pageProps) {
 
     useEffect(() => {
       if (!loading && !redirect && !authError) {
-        setTimeout(() => setShowSpinner(false), 1500);
+        setTimeout(() => setShowSpinner(false), 1000);
       }
     }, [loading, redirect, authError]);
 

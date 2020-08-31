@@ -3,21 +3,26 @@ const server = jsonServer.create();
 const router = jsonServer.router("db.json");
 const middlewares = jsonServer.defaults();
 const session = require("express-session");
+const uid = require("uid");
 
 const users = [
   {
+    id: uid(),
     username: "admin",
     password: "hunter1",
   },
   {
+    id: uid(),
     username: "testuser",
     password: "testpassword",
   },
   {
+    id: uid(),
     username: "hello",
     password: "world",
   },
   {
+    id: uid(),
     username: "user3",
     password: "password",
   },
@@ -60,6 +65,14 @@ server.post("/login", (req, res) => {
   }
 
   res.status(401).end();
+});
+
+server.get("/logout", (req, res) => {
+  if (req.session.user) {
+    req.session.destroy();
+  }
+
+  res.status(200).end();
 });
 
 server.get("/sessions", (req, res) => {

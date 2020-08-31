@@ -1,15 +1,18 @@
 import axios from "axios";
 
-const root = `${process.env.NEXT_PUBLIC_API_URL}/login`;
+const root = process.env.NEXT_PUBLIC_API_URL;
 
 const login = async (username, password) => {
   try {
-    await axios.post(root, { username, password }, { withCredentials: true });
+    var response = await axios.post(
+      `${root}/login`,
+      { username, password },
+      { withCredentials: true }
+    );
   } catch (err) {
     const unauthorized = err.response && err.response.status === 401;
 
     return {
-      authenticated: false,
       error: unauthorized ? "Invalid username or password" : err.message,
     };
   }
@@ -17,4 +20,12 @@ const login = async (username, password) => {
   return { authenticated: true };
 };
 
-export { login };
+const logout = async () => {
+  try {
+    await axios.get(`${root}/logout`, { withCredentials: true });
+  } catch (err) {
+    return;
+  }
+};
+
+export { login, logout };
