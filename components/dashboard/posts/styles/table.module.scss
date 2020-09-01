@@ -1,0 +1,14 @@
+@use "../../../../styles/theme";
+
+.container {
+  color: theme.$black;
+  font-size: 0.95rem;
+
+  th {
+    color: theme.$secondary-green;
+  }
+
+  td {
+    vertical-align: middle;
+  }
+}

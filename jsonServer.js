@@ -83,6 +83,14 @@ server.get("/sessions", (req, res) => {
   res.json({ authenticated: false });
 });
 
+server.get("/users/my/blogs", (req, res, next) => {
+  if (!req.session.user) {
+    return res.status(401).end();
+  }
+
+  next();
+});
+
 // Use default router
 server.use(router);
 server.listen(3001, () => {

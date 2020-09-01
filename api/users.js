@@ -4,7 +4,7 @@ const root = process.env.NEXT_PUBLIC_API_URL;
 
 const login = async (username, password) => {
   try {
-    var response = await axios.post(
+    await axios.post(
       `${root}/login`,
       { username, password },
       { withCredentials: true }

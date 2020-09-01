@@ -7,5 +7,6 @@
   height: 100%;
   width: 100%;
   z-index: 9999;
+  pointer-events: none;
   background-color: rgba(theme.$white, 0.5);
 }

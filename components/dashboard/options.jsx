@@ -11,8 +11,8 @@ import styles from "./styles/options.module.scss";
 
 export default function Options() {
   return (
-    <Col className={"py-5 pr-5 " + styles.container} xs="auto">
-      <Nav className="flex-column">
+    <Col className={"border-right " + styles.container} xs="auto">
+      <Nav className="flex-column sticky-top p-5">
         <div className="mb-5">
           <Nav.Item className={styles.header}>Blogs</Nav.Item>
           <Link href="/admin/dashboard/posts" passHref>

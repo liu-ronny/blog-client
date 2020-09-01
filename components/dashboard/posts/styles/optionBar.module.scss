@@ -1,0 +1,9 @@
+@use "../../../../styles/theme";
+
+.container {
+  color: theme.$black;
+}
+
+.icon {
+  color: theme.$secondary-green;
+}

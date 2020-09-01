@@ -7,7 +7,10 @@ import styles from "./styles/navbar.module.scss";
 
 export default function NavbarComponent({ onLogout }) {
   return (
-    <Navbar className="bg-primary-green text-white py-4 px-5">
+    <Navbar
+      className={"bg-primary-green text-white py-4 px-5 " + styles.container}
+      sticky="top"
+    >
       <Navbar.Brand>Dashboard</Navbar.Brand>
       <Nav className="ml-auto">
         <Link href="/" passHref>

@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { mutate } from "swr";
@@ -32,6 +33,9 @@ const Login = () => {
 
   return (
     <>
+      <Head>
+        <title>Login | Ronny Liu</title>
+      </Head>
       <Container
         className={"d-flex justify-content-center " + styles.container}
       >
@@ -48,6 +52,7 @@ const Login = () => {
 const ProtectedLogin = withRouteProtection(Login, {
   redirectIf: "loggedIn",
   redirectTo: "/admin/dashboard/posts",
+  delay: 1000,
 });
 
 ProtectedLogin.layout = LoginLayout;

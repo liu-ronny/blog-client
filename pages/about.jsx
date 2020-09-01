@@ -1,10 +1,16 @@
-import Page from "../components/general/page";
+import Head from "next/head";
 import MainLayout from "../components/layouts/main";
-import Content from "../components/general/content";
 import Header from "../components/general/header";
 
 const About = () => {
-  return <Header text="about" />;
+  return (
+    <>
+      <Head>
+        <title>About | Ronny Liu</title>
+      </Head>
+      <Header text="about" />
+    </>
+  );
 };
 
 About.layout = MainLayout;

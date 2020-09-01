@@ -1,5 +1,6 @@
 import DashboardLayout from "../../../components/layouts/dashboard";
 import withRouteProtection from "../../../components/hoc/withRouteProtection";
+import Spinner from "../../../components/dashboard/spinner";
 
 const Dashboard = () => {
   return <div>account hello</div>;
@@ -8,6 +9,7 @@ const Dashboard = () => {
 const ProtectedDashboard = withRouteProtection(Dashboard, {
   redirectIf: "loggedOut",
   redirectTo: "/",
+  SpinnerComponent: Spinner,
 });
 
 ProtectedDashboard.layout = DashboardLayout;

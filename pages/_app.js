@@ -9,7 +9,6 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 
 import "../styles/bootstrap.scss";
-import "react-placeholder/lib/reactPlaceholder.css";
 import "../styles/globals.scss";
 // import Dashboard from "../components/dashboard/page";
 

@@ -49,6 +49,8 @@ $theme-colors: (
   "secondary-green": theme.$secondary-green,
   "black": theme.$black,
   "white": theme.$white,
+  "red": theme.$red,
+  "dark-red": theme.$dark-red,
 );
 
 @import "./node_modules/bootstrap/scss/bootstrap";

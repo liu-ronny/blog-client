@@ -1,8 +1,6 @@
-import MainLayout from "../components/layouts/main";
+import Head from "next/head";
 import { getAll } from "../api/blogs";
-import classnames from "classnames";
-import Page from "../components/general/page";
-import Content from "../components/general/content";
+import MainLayout from "../components/layouts/main";
 import Header from "../components/general/header";
 import Tags from "../components/home/tags";
 import Searchbar from "../components/home/searchbar";
@@ -11,6 +9,9 @@ import Blogs from "../components/home/blogs";
 const Home = ({ error, blogs }) => {
   return (
     <>
+      <Head>
+        <title>Ronny Liu</title>
+      </Head>
       <Header text="blog" />
       <Tags />
       <Searchbar />

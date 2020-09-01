@@ -1,9 +1,17 @@
+import Head from "next/head";
 import MainLayout from "../../components/layouts/main";
 import { getAll, getBySlug } from "../../api/blogs";
 import Post from "../../components/blog/post";
 
 const Blog = ({ blog }) => {
-  return <Post blog={blog} />;
+  return (
+    <>
+      <Head>
+        <title>{blog.title}</title>
+      </Head>
+      <Post blog={blog} />
+    </>
+  );
 };
 
 Blog.layout = MainLayout;

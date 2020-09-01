@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { mutate } from "swr";
@@ -10,12 +11,11 @@ import Spinner from "../general/spinner";
 const DashboardLayout = ({ children }) => {
   const router = useRouter();
   const [showComponent, setShowComponent] = useState(false);
-  const [showSpinner, setShowSpinner] = useState(false);
   const { loading, authenticated, authError } = useAuth();
 
   useEffect(() => {
     if (!loading && authenticated) {
-      setShowComponent(true);
+      setTimeout(() => setShowComponent(true), 1000);
       return;
     }
 
@@ -29,20 +29,21 @@ const DashboardLayout = ({ children }) => {
   }
 
   const handleLogout = async () => {
-    setShowSpinner(true);
-
     await logout();
 
     const url = process.env.NEXT_PUBLIC_API_URL + "/sessions";
     mutate(url, { authenticated: false });
 
-    setShowSpinner(false);
+    router.replace("/");
   };
 
   return (
-    <div className="d-flex flex-column vh-100">
+    <div className="d-flex flex-column vh-100 bg-white">
+      <Head>
+        <title>Dashboard | Ronny Liu</title>
+      </Head>
       <Navbar onLogout={handleLogout} />
-      {showSpinner ? <Spinner /> : <Content>{children}</Content>}
+      <Content>{children}</Content>
     </div>
   );
 };

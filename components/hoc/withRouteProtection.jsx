@@ -1,15 +1,22 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import useAuth from "../../hooks/useAuth";
-import Spinner from "../general/spinner";
+import DefaultSpinner from "../general/spinner";
 
 /* eslint-disable */
 export default function withRouteProtection(Component, pageProps) {
   return () => {
-    const { redirectIf, redirectTo, ...props } = pageProps;
+    const {
+      redirectIf,
+      redirectTo,
+      SpinnerComponent,
+      delay,
+      ...props
+    } = pageProps;
     const { loading, authenticated, authError } = useAuth();
     const router = useRouter();
 
+    const Spinner = SpinnerComponent || DefaultSpinner;
     const [showSpinner, setShowSpinner] = useState(true);
 
     const redirectAuthenticatedUser =
@@ -30,9 +37,13 @@ export default function withRouteProtection(Component, pageProps) {
 
     useEffect(() => {
       if (!loading && !redirect && !authError) {
-        setTimeout(() => setShowSpinner(false), 1000);
+        if (delay) {
+          setTimeout(() => setShowSpinner(false), delay);
+        } else {
+          setShowSpinner(false);
+        }
       }
-    }, [loading, redirect, authError]);
+    }, [loading, redirect, authError, delay]);
 
     if (showSpinner) {
       return <Spinner />;
