@@ -1,9 +1,13 @@
 import { Nav, Button, Dropdown } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faSort, faFilter } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlusCircle,
+  faSort,
+  faFilter,
+} from "@fortawesome/free-solid-svg-icons";
 import styles from "./styles/optionBar.module.scss";
 
-export default function OptionBar() {
+export default function OptionBar({ onCreatePostClick }) {
   return (
     <div className={"d-flex mb-3 " + styles.container}>
       <Dropdown className="mr-3">
@@ -34,13 +38,11 @@ export default function OptionBar() {
           <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-      <Button
-        className="rounded-circle ml-auto"
-        variant="outline-primary-green"
-        size="sm"
-      >
-        <FontAwesomeIcon icon={faPlus} />
-      </Button>
+      <FontAwesomeIcon
+        className={"ml-auto " + styles.createIcon}
+        onClick={onCreatePostClick}
+        icon={faPlusCircle}
+      />
     </div>
   );
 }

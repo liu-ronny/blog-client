@@ -13,9 +13,11 @@
     "@fortawesome/free-regular-svg-icons": "^5.14.0",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/react-fontawesome": "^0.1.11",
+    "@tinymce/tinymce-react": "^3.6.0",
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
     "classnames": "^2.2.6",
+    "formik": "^2.1.5",
     "next": "9.5.2",
     "nprogress": "^0.2.0",
     "react": "16.13.1",
@@ -25,7 +27,8 @@
     "react-placeholder": "^4.0.3",
     "react-transition-group": "^4.4.1",
     "sass": "^1.26.10",
-    "swr": "^0.3.1"
+    "swr": "^0.3.1",
+    "yup": "^0.29.3"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

@@ -23,9 +23,6 @@ export default function TableComponent({ blogs }) {
         {blogs.map((blog) => {
           return <Row key={blog.id} blog={blog} />;
         })}
-        {blogs.map((blog) => {
-          return <Row key={blog.id} blog={blog} />;
-        })}
       </tbody>
     </Table>
   );
