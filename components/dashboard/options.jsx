@@ -11,7 +11,7 @@ import styles from "./styles/options.module.scss";
 
 export default function Options() {
   return (
-    <Col className={"border-right " + styles.container} xs="auto">
+    <Col className="border-right" xs="auto">
       <Nav className="flex-column sticky-top p-5">
         <div className="mb-5">
           <Nav.Item className={styles.header}>Blogs</Nav.Item>

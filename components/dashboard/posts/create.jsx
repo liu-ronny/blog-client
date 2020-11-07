@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { Editor } from "@tinymce/tinymce-react";
@@ -10,43 +9,25 @@ import {
   faPlusSquare,
   faMinusSquare,
 } from "@fortawesome/free-solid-svg-icons";
+import useBlogPostForm from "../../../hooks/useBlogPostForm";
+import { createBlog } from "../../../api/blogs";
 import classnames from "classnames";
 import styles from "./styles/create.module.scss";
 
-export default function Create({ onBackClick }) {
-  const [showPreviewText, setShowPreviewText] = useState(true);
-  const [expand, setExpand] = useState(false);
-
-  const [tags, setTags] = useState([]);
-  const [saveAsDraft, setSaveAsDraft] = useState(false);
-  const [body, setBody] = useState("");
-
-  const handleTagsChange = (event) => {
-    let updatedTags = [...tags];
-    const tag = event.target.value;
-    const checked = event.target.checked;
-    const tagInList = updatedTags.includes(tag);
-
-    if (checked && !tagInList) {
-      updatedTags.push(tag);
-    } else if (!checked && tagInList) {
-      updatedTags = updatedTags.filter((prevTag) => prevTag !== tag);
-    }
-
-    setTags(updatedTags);
-  };
-
-  const handleEditorChange = (content, editor) => {
-    console.log(content);
-    setBody(content);
-  };
+export default function Create({
+  onBackClick,
+  setShowCreatePost,
+  setCreateMessage,
+  blog,
+}) {
+  const form = useBlogPostForm(blog);
 
   const containerClassNames = classnames("p-5", styles.container, {
-    [styles.expand]: expand,
+    [styles.expand]: form.expand,
   });
 
   const previewTextClassNames = classnames("rounded-0", {
-    [styles.hide]: !showPreviewText,
+    [styles.hide]: !form.showPreviewText,
   });
 
   const schema = yup.object({
@@ -54,19 +35,46 @@ export default function Create({ onBackClick }) {
     previewText: yup.string().required("required"),
   });
 
-  const handleSubmit = (values, { setSubmitting }) => {
+  const handleSubmit = async (values, { setSubmitting }) => {
     setSubmitting(false);
-    console.log(values, tags, saveAsDraft);
+    form.setError(false);
+
+    const blog = {
+      title: values.title,
+      tags: form.tags,
+      hidden: form.saveAsDraft,
+      previewText: values.previewText,
+      body: form.body,
+      author: "tester", // for testing
+      date: {
+        year: "2020",
+        month: "September",
+        day: "03",
+      },
+    };
+    const response = await createBlog(blog);
+
+    if (response.error) {
+      form.setError(response.error);
+    } else {
+      setShowCreatePost(false);
+
+      setCreateMessage("Successfully created a new blog post!");
+      setTimeout(() => setCreateMessage(""), 10000);
+    }
   };
 
   return (
     <div className={containerClassNames}>
+      {form.error ? (
+        <div className="border-dark-red p-3">{form.error}</div>
+      ) : null}
       <Formik
         validationSchema={schema}
         onSubmit={handleSubmit}
         initialValues={{
-          title: "",
-          previewText: "",
+          title: blog?.title || "",
+          previewText: blog?.previewText || "",
         }}
       >
         {({ handleChange, handleSubmit, values, touched, errors }) => {
@@ -76,19 +84,19 @@ export default function Create({ onBackClick }) {
                 <div className="d-flex justify-content-between">
                   <Form.Label className={styles.label}>Title</Form.Label>
                   <div>
-                    {expand ? (
+                    {form.expand ? (
                       <FontAwesomeIcon
                         className={styles.expandIcon}
                         icon={faCompressArrowsAlt}
                         size="lg"
-                        onClick={() => setExpand(false)}
+                        onClick={() => form.setExpand(false)}
                       />
                     ) : (
                       <FontAwesomeIcon
                         className={styles.expandIcon}
                         icon={faExpandArrowsAlt}
                         size="lg"
-                        onClick={() => setExpand(true)}
+                        onClick={() => form.setExpand(true)}
                       />
                     )}
                   </div>
@@ -118,7 +126,8 @@ export default function Create({ onBackClick }) {
                           type="checkbox"
                           id="doggo"
                           value="doggo"
-                          onChange={handleTagsChange}
+                          defaultChecked={form.tags.includes("doggo")}
+                          onChange={form.handleTagsChange}
                         />
                       </Col>
                       <Col xs="auto">
@@ -129,7 +138,8 @@ export default function Create({ onBackClick }) {
                           type="checkbox"
                           id="ipsum"
                           value="ipsum"
-                          onChange={handleTagsChange}
+                          defaultChecked={form.tags.includes("ipsum")}
+                          onChange={form.handleTagsChange}
                         />
                       </Col>
                       <Col xs="auto">
@@ -141,7 +151,8 @@ export default function Create({ onBackClick }) {
                           type="checkbox"
                           id="dog"
                           value="dog"
-                          onChange={handleTagsChange}
+                          defaultChecked={form.tags.includes("dog")}
+                          onChange={form.handleTagsChange}
                         />
                       </Col>
                     </Form.Row>
@@ -161,10 +172,10 @@ export default function Create({ onBackClick }) {
                           type="checkbox"
                           id="true"
                           value="true"
-                          checked={saveAsDraft}
+                          checked={form.saveAsDraft}
                           onChange={(event) => {
                             if (event.target.checked) {
-                              setSaveAsDraft(true);
+                              form.setSaveAsDraft(true);
                             }
                           }}
                         />
@@ -177,10 +188,10 @@ export default function Create({ onBackClick }) {
                           type="checkbox"
                           id="false"
                           value="false"
-                          checked={!saveAsDraft}
+                          checked={!form.saveAsDraft}
                           onChange={(event) => {
                             if (event.target.checked) {
-                              setSaveAsDraft(false);
+                              form.setSaveAsDraft(false);
                             }
                           }}
                         />
@@ -192,17 +203,17 @@ export default function Create({ onBackClick }) {
               <Form.Group className="mt-3" controlId="previewText">
                 <Form.Label className={styles.label}>
                   <span>Preview</span>
-                  {showPreviewText ? (
+                  {form.showPreviewText ? (
                     <FontAwesomeIcon
                       className={"ml-2 " + styles.previewTextIcon}
                       icon={faMinusSquare}
-                      onClick={() => setShowPreviewText(false)}
+                      onClick={() => form.setShowPreviewText(false)}
                     />
                   ) : (
                     <FontAwesomeIcon
                       className={"ml-2 " + styles.previewTextIcon}
                       icon={faPlusSquare}
-                      onClick={() => setShowPreviewText(true)}
+                      onClick={() => form.setShowPreviewText(true)}
                     />
                   )}
                 </Form.Label>
@@ -225,20 +236,41 @@ export default function Create({ onBackClick }) {
                 <Editor
                   apiKey="hzstptt72sqz7yzd6fp6rgbp7bjq8zjwkx7o6rkkohns8u3p"
                   textareaName="body"
-                  onEditorChange={handleEditorChange}
-                  value={body}
+                  onEditorChange={form.handleEditorChange}
+                  value={form.body}
                   init={{
                     height: 500,
-                    menubar: false,
+                    menubar: "file edit insert view format table tools help",
                     plugins: [
                       "advlist autolink lists link image charmap print preview anchor",
                       "searchreplace visualblocks code fullscreen",
                       "insertdatetime media table paste code help wordcount",
+                      "codesample",
                     ],
                     toolbar:
-                      "undo redo | formatselect | bold italic backcolor | \
+                      "undo redo | formatselect | bold italic forecolor backcolor | \
              alignleft aligncenter alignright alignjustify | \
-             bullist numlist outdent indent | removeformat | help",
+             bullist numlist outdent indent | codesample | removeformat | fullscreen",
+                    color_map: [
+                      "444444",
+                      "Black",
+                      "6c8c74",
+                      "Primary green",
+                      "5b7349",
+                      "Secondary green",
+                      "ebeef2",
+                      "Grey",
+                      "d2d5d9",
+                      "Dark grey",
+                      "b0bdd9",
+                      "Blue",
+                      "dc3545",
+                      "Red",
+                      "a62834",
+                      "Dark red",
+                      "ffffff",
+                      "White",
+                    ],
                   }}
                 />
               </Form.Group>
@@ -248,7 +280,7 @@ export default function Create({ onBackClick }) {
                   variant="outline-secondary-green"
                   type="submit"
                 >
-                  Create
+                  {blog ? "Save" : "Create"}
                 </Button>
                 <Button variant="outline-dark-red" onClick={onBackClick}>
                   Cancel

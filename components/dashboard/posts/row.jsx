@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import styles from "./styles/row.module.scss";
 
-export default function Row({ blog }) {
+export default function Row({ blog, setBlogToEdit, handleDelete }) {
   return (
     <tr>
       <td>{blog.title}</td>
@@ -28,10 +28,16 @@ export default function Row({ blog }) {
           className={"mr-3 " + styles.button}
           variant="outline-secondary-green"
           size="sm"
+          onClick={() => setBlogToEdit(blog)}
         >
           Edit
         </Button>
-        <Button className={styles.button} variant="outline-dark-red" size="sm">
+        <Button
+          className={styles.button}
+          variant="outline-dark-red"
+          size="sm"
+          onClick={() => handleDelete(blog)}
+        >
           Delete
         </Button>
       </td>

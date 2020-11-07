@@ -1,0 +1,11 @@
+@use "../../../../styles/theme";
+
+.delete {
+  border: 1px solid theme.$dark-red;
+  color: theme.$dark-red;
+}
+
+.create {
+  border: 1px solid theme.$purple;
+  color: theme.$purple;
+}

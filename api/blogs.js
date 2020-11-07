@@ -27,4 +27,43 @@ const getUserBlogs = async () => {
   return blogs;
 };
 
-export { getAll, getBySlug, getUserBlogs };
+const createBlog = async (blog) => {
+  try {
+    var response = await axios.post(`${root}/blogs`, blog, {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+  } catch (err) {
+    if (err.response) {
+      return err.response;
+    } else if (err.request) {
+      return { error: "the server did not respond to the request" };
+    } else {
+      return { error: err.message };
+    }
+  }
+
+  return response.data;
+};
+
+const deleteBlog = async (id) => {
+  try {
+    var response = await axios.delete(`${root}/blogs/${id}`, {
+      withCredentials: true,
+    });
+  } catch (err) {
+    if (err.response) {
+      return err.response;
+    } else if (err.request) {
+      return { error: "the server did not respond to the request" };
+    } else {
+      return { error: err.message };
+    }
+  }
+
+  return response.data;
+};
+
+export { getAll, getBySlug, getUserBlogs, createBlog, deleteBlog };

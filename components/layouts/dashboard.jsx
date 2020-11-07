@@ -1,12 +1,15 @@
+import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { mutate } from "swr";
 import { logout } from "../../api/users";
+import { DashboardContentProvider } from "../../contexts/dashboardContent";
 import useAuth from "../../hooks/useAuth";
 import Navbar from "../dashboard/navbar";
 import Content from "../dashboard/content";
 import Spinner from "../general/spinner";
+import styles from "./styles/dashboard.module.scss";
 
 const DashboardLayout = ({ children }) => {
   const router = useRouter();
@@ -38,12 +41,14 @@ const DashboardLayout = ({ children }) => {
   };
 
   return (
-    <div className="d-flex flex-column vh-100 bg-white">
+    <div className={"d-flex flex-column vh-100 bg-white " + styles.container}>
       <Head>
         <title>Dashboard | Ronny Liu</title>
       </Head>
       <Navbar onLogout={handleLogout} />
-      <Content>{children}</Content>
+      <DashboardContentProvider>
+        <Content>{children}</Content>
+      </DashboardContentProvider>
     </div>
   );
 };
